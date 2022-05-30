@@ -1,0 +1,26 @@
+{
+
+  "manifest_version": 2,
+  "name": "Twitter tab closer",
+  "version": "1.0",
+
+  "description": "Closes a twitter after 5 min and let you back in an hour!",
+
+  "icons": {
+    "48": "icons/close.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["tabcloser.js"]
+    }
+  ],
+  "browser_specific_settings": {
+  	"gecko": {
+    	"id": "tabcloser@me.com"
+  	}
+  }
+
+}
+
