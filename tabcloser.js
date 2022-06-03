@@ -1,6 +1,6 @@
 let status;
-let allowTime =7200000; //ms
-let closeTime =600000; // ms
+let allowTime =20000 //7200000; //ms
+let closeTime =10000//600000; // ms
 let leftTime = allowTime / 1000; //s
 let showTime = 2 + "h "+ 0+"m "+ 0+ " s";
 let myDiv;
@@ -39,11 +39,18 @@ function getOut() {
 
 
 // get out, if the status is false
+
 if(!status){ 
-    main()
+  showTimeEverySec()
 }
+// if(!status ){ 
+//   getOut() 
+//   showTimeEverySec()
+// }
+
+
 //get out after a specific time
-function main() {
+function showTimeEverySec() {
     allow(false)
     getOut()
 
@@ -51,30 +58,30 @@ function main() {
     document.getElementById("showTime").innerText = showTime;
 
     //show time every second
-    setInterval(() => {    
-      leftTime = leftTime - 1;
-      let hours = Math.floor(leftTime / (60 * 60));
-      let minutes = Math.floor((leftTime % (60 * 60)) /  60);
-      let seconds = Math.floor(leftTime % 60);
-      showTime =  ((hours != 0)?(hours + "h "):"") + ((minutes !=0)?(minutes + "m "):"") + seconds + "s ";
-      if(leftTime === 0 ){
-        myP.innerText = `Now you can refresh the page and have fun for 10 min`
-        setTimeout(() => {
-          main()
-        }, closeTime);
-      } 
-      else{
-        document.getElementById("showTime").innerText = showTime;
-        leftTime = leftTime - 1;
-      }
-    }, 1000)
+  let eveySec =   setInterval(() => {    
+                  let hours = Math.floor(leftTime / (60 * 60));
+                  let minutes = Math.floor((leftTime % (60 * 60)) /  60);
+                  let seconds = Math.floor(leftTime % 60);
+                  showTime =  ((hours != 0)?(hours + "h "):"") + ((minutes !=0)?(minutes + "m "):"") + seconds + "s ";
+                  console.log(leftTime);
+                  if(leftTime == 0 ){
+                    myP.innerText = `Now you can refresh the page and have fun for 10 min`
+                  } 
+                  else{
+                    document.getElementById("showTime").innerText = showTime;
+                    leftTime = leftTime - 1;
+                  }
+                }, 1000)
+    setTimeout(() => {
+      clearInterval(eveySec)
+    }, (allowTime + 3000));
 }
 setTimeout(() => {
-  main()
+  showTimeEverySec()
 }, closeTime );
 
 
 // allow again every XXX seconds
 setInterval(() => {
     allow(true)
-  }, allowTime);
+}, (allowTime + closeTime));
