@@ -63,7 +63,6 @@ function showTimeEverySec() {
                   let minutes = Math.floor((leftTime % (60 * 60)) /  60);
                   let seconds = Math.floor(leftTime % 60);
                   showTime =  ((hours != 0)?(hours + "h "):"") + ((minutes !=0)?(minutes + "m "):"") + seconds + "s ";
-                  console.log(leftTime);
                   if(leftTime == 0 ){
                     myP.innerText = `Now you can refresh the page and have fun for 10 min`
                   } 
