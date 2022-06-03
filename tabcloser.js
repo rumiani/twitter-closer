@@ -40,10 +40,10 @@ function getOut() {
 
 // get out, if the status is false
 if(!status){ 
-    getOut() 
+    main()
 }
 //get out after a specific time
-setTimeout(() => {
+function main() {
     allow(false)
     getOut()
 
@@ -52,18 +52,25 @@ setTimeout(() => {
 
     //show time every second
     setInterval(() => {    
+      leftTime = leftTime - 1;
       let hours = Math.floor(leftTime / (60 * 60));
       let minutes = Math.floor((leftTime % (60 * 60)) /  60);
       let seconds = Math.floor(leftTime % 60);
       showTime =  ((hours != 0)?(hours + "h "):"") + ((minutes !=0)?(minutes + "m "):"") + seconds + "s ";
       if(leftTime === 0 ){
         myP.innerText = `Now you can refresh the page and have fun for 10 min`
+        setTimeout(() => {
+          main()
+        }, closeTime);
       } 
       else{
         document.getElementById("showTime").innerText = showTime;
         leftTime = leftTime - 1;
       }
     }, 1000)
+}
+setTimeout(() => {
+  main()
 }, closeTime );
 
 
