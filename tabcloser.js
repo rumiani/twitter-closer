@@ -11,6 +11,9 @@ if(localStorage.getItem('status') === null) {
   } else {
     status = JSON.parse(localStorage.getItem('status'));
   }
+
+
+
 // set the status
 function allow(status) {
     let statusStr=JSON.stringify(status);
@@ -24,11 +27,11 @@ function getOut() {
     reactRoot?.remove();
     document.title = "Go Away"
     myDiv = document.createElement("div");
-    myDiv.innerText = `You have work to do! \n Get the fuck out of here. NOW!`;
+    myDiv.innerText = `You have work to do! \n You may leave here. NOW!`;
     myDiv.style.cssText = "width : 100%; height : 100%; text-align : center; color :red; font-weight:bold; font-size:40px; padding-top: 100px; background-color:black;"
     
     myP = document.createElement("p");
-    myP.innerHTML =`I'll let you back <span id="showTime"></span> after closing or stop refreshing this fucking tab!`;
+    myP.innerHTML =`I'll let you back <span id="showTime"></span> after closing or stop refreshing this tab!`;
     myP.style.color = "green";
 
     document.body.appendChild(myDiv).appendChild(myP)
@@ -38,22 +41,13 @@ function getOut() {
 }
 
 
-// get out, if the status is false
-
-if(!status){ 
-  showTimeEverySec()
-}
-// if(!status ){ 
-//   getOut() 
-//   showTimeEverySec()
-// }
 
 
 //get out after a specific time
 function showTimeEverySec() {
-    allow(false)
-    getOut()
-
+  allow(false)
+  getOut()
+  
     //show the initial time
     document.getElementById("showTime").innerText = showTime;
 
@@ -75,12 +69,26 @@ function showTimeEverySec() {
       clearInterval(eveySec)
     }, (allowTime + 3000));
 }
+
 setTimeout(() => {
   showTimeEverySec()
 }, closeTime );
 
-
 // allow again every XXX seconds
 setInterval(() => {
     allow(true)
-}, (allowTime + closeTime));
+  }, (allowTime + closeTime));
+
+  // get out, if the status is false
+  if(!status){ 
+    showTimeEverySec()
+  }
+
+  // Hide the notification Number
+  let checkNotificationsLoad = setInterval(hideIfExist, 100);
+function hideIfExist() {
+  let el = document.querySelector('[aria-live]')
+  el.style.visibility = "hidden"
+  document.title = "Twitter"
+  if(el != null) clearInterval(checkNotificationsLoad)
+}
