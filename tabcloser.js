@@ -22,7 +22,7 @@ function allow(status) {
 function getOut() {
     let reactRoot = document.getElementById("react-root")
     reactRoot?.remove();
-
+    document.title = "Go Away"
     myDiv = document.createElement("div");
     myDiv.innerText = `You have work to do! \n Get the fuck out of here. NOW!`;
     myDiv.style.cssText = "width : 100%; height : 100%; text-align : center; color :red; font-weight:bold; font-size:40px; padding-top: 100px; background-color:black;"
