@@ -1,6 +1,6 @@
 let status;
-let allowTime =20000 //7200000; //ms
-let closeTime =10000//600000; // ms
+let allowTime =7200000; //ms
+let closeTime =600000; // ms
 let leftTime = allowTime / 1000; //s
 let showTime = 2 + "h "+ 0+"m "+ 0+ " s";
 let myDiv;
