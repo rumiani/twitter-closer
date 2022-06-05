@@ -88,7 +88,7 @@ setInterval(() => {
   let checkNotificationsLoad = setInterval(hideIfExist, 100);
 function hideIfExist() {
   let el = document.querySelector('[aria-live]')
-  el.style.visibility = "hidden"
+  el?.style.visibility = "hidden"
   document.title = "Twitter"
   if(el != null) clearInterval(checkNotificationsLoad)
 }
